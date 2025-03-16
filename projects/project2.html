@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Quantum Circuit Simulator | Quasi</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Project-specific styles */
+        .project-hero {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(to right, #003b7a, #0057b8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../images/quantum-bg.jpg') center/cover;
+            opacity: 0.2;
+        }
+
+        .project-title {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .project-title h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .project-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .project-content {
+            padding: 50px 0;
+        }
+
+        .project-section {
+            margin-bottom: 70px;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .image-container {
+            margin: 30px 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .demo-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .demo-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 87, 184, 0.3);
+        }
+
+        .features-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '\f140';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 15px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Inconsolata', monospace;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-hero">
+        <button class="back-button" onclick="window.location.href='../index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="project-title">
+            <h1>Advanced Quantum Circuit Simulator</h1>
+            <p>A web-based simulator for complex quantum circuits with noise modeling</p>
+        </div>
+    </div>
+
+    <div class="project-content">
+        <div class="container">
+            <div class="project-section">
+                <h2>About the Project</h2>
+                <p>The Advanced Quantum Circuit Simulator is a sophisticated web-based tool designed to accurately simulate quantum circuits while accounting for real-world noise and decoherence effects. This simulator provides researchers, developers, and students with the ability to test and validate quantum algorithms in environments that closely resemble actual quantum hardware.</p>
+                
+                <div class="image-container">
+                    <img src="../images/project2-main.jpg" alt="Quantum Circuit Simulator Interface">
+                </div>
+                
+                <p>Unlike idealized simulators, our quantum circuit simulator incorporates comprehensive noise models derived from real quantum processors, allowing users to anticipate and mitigate errors that would occur in physical implementations. The simulator supports circuits with up to 30 qubits, enabling exploration of complex quantum algorithms and error correction techniques.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Interactive drag-and-drop circuit builder with extensive gate library</li>
+                    <li>Multiple configurable noise models based on real quantum hardware</li>
+                    <li>Advanced visualization of quantum states and error propagation</li>
+                    <li>Support for quantum error correction codes and techniques</li>
+                    <li>Measurement and statistical analysis tools for circuit outputs</li>
+                    <li>Cloud-based execution for simulating larger circuits</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Noise Modeling</h2>
+                <p>Our simulator implements several types of quantum noise channels commonly encountered in physical quantum computers:</p>
+
+                <div class="code-block">
+<pre>// Example of configuring a depolarizing noise model
+simulator.setNoiseModel({
+  gateErrors: {
+    single: { type: 'depolarizing', probability: 0.001 },
+    two: { type: 'depolarizing', probability: 0.01 }
+  },
+  readoutErrors: { probabilities: [[0.99, 0.01], [0.02, 0.98]] },
+  thermalRelaxation: { T1: 50000, T2: 70000 }
+});</pre>
+                </div>
+
+                <p>The simulator allows detailed customization of error parameters to match specific quantum hardware profiles, enabling accurate prediction of algorithm performance on target devices.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Technology Stack</h2>
+                <p>This project was built using:</p>
+                <ul class="features-list">
+                    <li>WebAssembly for high-performance quantum state simulations</li>
+                    <li>React and D3.js for interactive circuit visualization</li>
+                    <li>Python backend with Qiskit and QuTiP for advanced quantum models</li>
+                    <li>WebGL for 3D visualization of quantum states</li>
+                    <li>Docker containers for scalable cloud execution</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Try it Out</h2>
+                <p>Experience the Advanced Quantum Circuit Simulator for yourself. The interactive demo allows you to build circuits, apply noise models, and observe how quantum algorithms perform under realistic conditions.</p>
+                <a href="#" class="demo-link">
+                    <i class="fas fa-external-link-alt"></i> Launch Simulator
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Quasi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.project-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.project-section.animate').forEach(section => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html> 

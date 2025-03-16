@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Algorithm Visualization | Quantum Explorations</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Project-specific styles */
+        .project-hero {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(to right, #1a237e, #283593);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../images/quantum-bg.jpg') center/cover;
+            opacity: 0.2;
+        }
+
+        .project-title {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .project-title h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .project-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .project-content {
+            padding: 50px 0;
+        }
+
+        .project-section {
+            margin-bottom: 70px;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .image-container {
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .demo-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .demo-link:hover {
+            background: #574dff;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .features-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '\f140';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 15px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="project-hero">
+        <button class="back-button" onclick="window.location.href='../index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="project-title">
+            <h1>Quantum Algorithm Visualization</h1>
+            <p>Interactive visualizations of quantum algorithms and their applications</p>
+        </div>
+    </div>
+
+    <div class="project-content">
+        <div class="container">
+            <div class="project-section">
+                <h2>About the Project</h2>
+                <p>This project aims to provide intuitive visualizations of complex quantum algorithms, making them more accessible for students, researchers, and quantum computing enthusiasts. By transforming abstract mathematical concepts into interactive visual representations, users can gain a deeper understanding of how quantum algorithms work.</p>
+                
+                <div class="image-container">
+                    <img src="../images/project1-main.jpg" alt="Quantum Algorithm Visualization Screenshot">
+                </div>
+                
+                <p>The visualization tool supports multiple quantum algorithms, including Shor's algorithm, Grover's search, quantum Fourier transform, and more. Each visualization breaks down the algorithm into step-by-step processes, allowing users to observe the quantum state changes at each stage.</p>
+            </div>
+
+            <div class="project-section">
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Interactive 3D visualization of quantum states and their evolution</li>
+                    <li>Step-by-step walkthroughs of popular quantum algorithms</li>
+                    <li>Customizable parameters to experiment with different inputs</li>
+                    <li>Detailed explanations of each algorithm's theory and applications</li>
+                    <li>Comparisons between classical and quantum approaches to the same problems</li>
+                    <li>Downloadable simulation data for further analysis</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Technology Stack</h2>
+                <p>This project was built using:</p>
+                <ul class="features-list">
+                    <li>WebGL and Three.js for 3D visualizations</li>
+                    <li>React for the user interface components</li>
+                    <li>Qiskit for quantum circuit simulations</li>
+                    <li>D3.js for data visualization</li>
+                    <li>Web Workers for handling computational tasks without blocking the UI</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <h2>Try it Out</h2>
+                <p>Experience the quantum algorithm visualizations for yourself. The interactive demo allows you to explore various algorithms and manipulate parameters to see how they affect the outcomes.</p>
+                <a href="#" class="demo-link">
+                    <i class="fas fa-external-link-alt"></i> Launch Demo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Quantum Explorations. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.project-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.project-section.animate').forEach(section => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html> 
