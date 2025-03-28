@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-js', {
             "particles": {
                 "number": {
-                    "value": 120,
+                    "value": 80,
                     "density": {
                         "enable": true,
                         "value_area": 800
                     }
                 },
                 "color": {
-                    "value": ["#0057b8", "#00d4aa", "#003b7a"]
+                    "value": ["#5663fe", "#00e5a0", "#1a1e4e"]
                 },
                 "shape": {
                     "type": "circle",
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
-                    "color": "#0057b8",
+                    "color": "#5663fe",
                     "opacity": 0.4,
                     "width": 1
                 },
@@ -119,40 +119,121 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Create random stars for background animation - simulating quantum particles
-    function createStars() {
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            if (this.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    }
+
+    // Tabs functionality
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the tab ID from data-tab attribute and activate the corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    }
+
+    // Contact form submission (prevent default and show thank you message)
+    const contactForm = document.querySelector('.contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formElements = this.elements;
+            let isValid = true;
+            
+            // Basic form validation
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].hasAttribute('required') && !formElements[i].value) {
+                    isValid = false;
+                    formElements[i].classList.add('error');
+                } else if (formElements[i].type === 'email' && formElements[i].value) {
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(formElements[i].value)) {
+                        isValid = false;
+                        formElements[i].classList.add('error');
+                    }
+                }
+            }
+            
+            if (isValid) {
+                // Hide the form
+                this.innerHTML = '<div class="thank-you-message"><i class="fas fa-check-circle"></i><h3>Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you soon.</p></div>';
+            }
+        });
+    }
+
+    // Create quantum particle effect on hero
+    function createQuantumParticles() {
         const hero = document.querySelector('.hero');
         if (hero) {
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'stars';
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
                 
-                // Random positioning
-                star.style.top = Math.random() * 100 + '%';
-                star.style.left = Math.random() * 100 + '%';
+                // Random position
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.left = Math.random() * 100 + '%';
                 
-                // Vary size slightly to simulate different quantum particles
-                star.style.width = (Math.random() * 3 + 1) + 'px';
-                star.style.height = (Math.random() * 3 + 1) + 'px';
+                // Random size
+                const size = Math.random() * 5 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random opacity and color
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
                 
                 // Random animation delay
-                star.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
                 
-                hero.appendChild(star);
+                hero.appendChild(particle);
             }
         }
     }
     
-    createStars();
+    createQuantumParticles();
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
+            
+            // Close mobile menu if open
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+            
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 window.scrollTo({
-                    top: target.offsetTop - 70, // Offset for header
+                    top: target.offsetTop - 80, // Offset for header
                     behavior: 'smooth'
                 });
             }
@@ -161,61 +242,96 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animation for elements when they come into view
     function animateOnScroll() {
-        const elements = document.querySelectorAll('.section h2, .project-card');
+        const elements = document.querySelectorAll('.section-header, .solution-card, .about-stats, .stat-card, .tech-showcase, .contact-wrapper');
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('animate');
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
 
         elements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(element);
         });
     }
 
-    // Run animation on scroll after a short delay to ensure all styles are applied
-    setTimeout(animateOnScroll, 500);
+    // Run animation on scroll
+    setTimeout(animateOnScroll, 100);
 
-    // Add quantum effect to the logo text on hover
-    const quantumText = document.querySelector('.quantum-text');
-    if (quantumText) {
-        quantumText.addEventListener('mouseover', function() {
-            this.style.animation = 'none'; // Reset the animation
-            setTimeout(() => {
-                this.style.animation = 'pulse 1s infinite'; // Restart the animation
-            }, 10);
-        });
+    // Counter animation for stat numbers
+    function animateCounters() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        if (statNumbers.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const value = parseFloat(target.innerText);
+                        let count = 0;
+                        const duration = 2000; // ms
+                        const frameRate = 30; // ms
+                        const increment = value / (duration / frameRate);
+                        
+                        // Check if it's a percentage
+                        const isPercentage = target.innerText.includes('%');
+                        
+                        const counter = setInterval(() => {
+                            count += increment;
+                            if (count >= value) {
+                                clearInterval(counter);
+                                count = value;
+                            }
+                            
+                            // Format the number appropriately
+                            if (isPercentage) {
+                                target.innerText = count.toFixed(1) + '%';
+                            } else {
+                                target.innerText = count.toFixed(1) + 'x';
+                            }
+                        }, frameRate);
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            
+            statNumbers.forEach(number => {
+                observer.observe(number);
+            });
+        }
     }
     
-    // Enhanced hover effect for project cards - simulating quantum state change
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            // Rotate and scale the icon to simulate quantum state change
-            this.querySelector('.project-icon').style.transform = 'scale(1.2) rotate(5deg)';
-            this.querySelector('.project-icon').style.transition = 'transform 0.3s ease';
-            
-            // Simulate quantum fluctuation with subtle color change
-            this.querySelector('.project-icon').style.color = '#00d4aa';
-            
-            // Remove the glow effect to eliminate any background animation
-            this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.1)';
-        });
+    animateCounters();
+
+    // Optional: Typed.js-like effect for the hero headline
+    function typeEffect() {
+        const headline = document.querySelector('.hero h1 .highlight');
         
-        card.addEventListener('mouseleave', function() {
-            // Return to original state
-            this.querySelector('.project-icon').style.transform = 'scale(1) rotate(0deg)';
-            this.querySelector('.project-icon').style.color = '';
-            this.style.boxShadow = '';
-        });
-    });
-}); 
+        if (headline) {
+            const text = headline.innerText;
+            headline.innerText = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    headline.innerText += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 100);
+        }
+    }
+    
+    // Uncomment to enable typing effect
+    // typeEffect();
+});
