@@ -97,6 +97,13 @@ header.scrolled {
     align-items: center;
 }
 
+.logo img {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+}
+
 .quantum-text {
     color: var(--primary-color);
     font-size: 28px;
