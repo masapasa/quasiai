@@ -13,6 +13,9 @@
     <header>
         <div class="logo">
             <img src="quasi_logo_new.jpeg" alt="QuaSi AI Logo">
+            <div class="logo-text">
+                <span class="quantum-text">Q</span>uaSi
+            </div>
         </div>
         <nav>
             <ul>
@@ -92,36 +95,11 @@
             </div>
             <div class="tech-showcase">
                 <div class="tech-tabs">
-                    <button class="tab-btn active" data-tab="tab1">Quantum PINNs</button>
-                    <button class="tab-btn" data-tab="tab2">Attention Mechanisms</button>
-                    <button class="tab-btn" data-tab="tab3">Hybrid Computing</button>
+                    <button class="tab-btn active" data-tab="tab3">Hybrid Computing</button>
                 </div>
-                <div class="tab-content active" id="tab1">
-                    <h3>Quantum Physics-Informed Neural Networks</h3>
-                    <p>At the bleeding edge of quantum computing, we're developing hybrid quantum-classical platforms using TensorFlow Quantum and Qiskit to design revolutionary QPINNs. Our approach leverages Parameterized Quantum Circuits for feature encoding and variational quantum algorithms for optimization.</p>
-                    <div class="tech-features">
-                        <div class="feature"><i class="fas fa-check-circle"></i> Quantum advantage for complex PDEs</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> Enhanced representation capacity</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> IBM Quantum partnership</div>
-                    </div>
-                </div>
-                <div class="tab-content" id="tab2">
-                    <h3>Advanced Attention Mechanisms</h3>
-                    <p>Our classical PINN architectures implement state-of-the-art deep learning frameworks with multi-head attention mechanisms that intelligently focus computational resources on critical solution regions, dramatically improving convergence rates and accuracy.</p>
-                    <div class="tech-features">
-                        <div class="feature"><i class="fas fa-check-circle"></i> Adaptive resolution refinement</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> Multi-scale physics handling</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> Improved gradient propagation</div>
-                    </div>
-                </div>
-                <div class="tab-content" id="tab3">
+                <div class="tab-content active" id="tab3">
                     <h3>Hybrid Quantum-Classical Computing</h3>
-                    <p>Our hybrid approach combines the strengths of quantum computing for specific computational bottlenecks with classical high-performance computing infrastructure, creating an optimal balance of quantum advantage and practical deployability.</p>
-                    <div class="tech-features">
-                        <div class="feature"><i class="fas fa-check-circle"></i> Scalable architecture</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> Cloud integration</div>
-                        <div class="feature"><i class="fas fa-check-circle"></i> Hardware-agnostic implementation</div>
-                    </div>
+                    <p>We propose hybrid quantum-classical solution (e.g., PINNs, DeepONets, PINNFormer with quantum submodules) which can remain competitive and strategically valuable by focusing on Quantum-Classical High-Performance Computing (QC-HPC) integration and scalability over time. By integrating quantum computing into existing HPC workflows, our models serve as drop-in accelerators for specific computational bottlenecks (e.g., spectral transforms, linear solvers, uncertainty quantification). Even partial quantum acceleration of these tasks can offload expensive subroutines from classical clusters, freeing up HPC resources and reducing overall computational costs. This incremental integration enables parallel co-processing, where quantum and classical components collaborate rather than compete—achieving speedups in multi-step CFD pipelines even if quantum modules are not yet dominant end-to-end.</p>
                 </div>
             </div>
         </div>
@@ -135,6 +113,9 @@
             </div>
             <div class="contact-wrapper">
                 <div class="contact-info">
+                    <div class="logo-text">
+                        <p>Aditya Seshaditya</p>
+                    </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <p>aditya@quasi.digital</p>
@@ -155,26 +136,6 @@
             </div>
         </div>
     </section>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="quantum-text">Q</span>uaSi
-                </div>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#solutions">Solutions</a>
-                    <a href="#technology">Technology</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-copyright">
-                    <p>&copy; 2025 QuaSi AI. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>

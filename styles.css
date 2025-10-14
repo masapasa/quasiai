@@ -104,6 +104,10 @@ header.scrolled {
     object-fit: contain;
 }
 
+.logo-text {
+    margin-left: 10px;
+}
+
 .quantum-text {
     color: var(--primary-color);
     font-size: 28px;
