@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation - Crystal Growth Simulation | QuaSi</title>
+    <meta name="description" content="Benchmark validation of QuaSi's hybrid quantum-classical PINN surrogate for Czochralski silicon melt flow, measured on certified CFD reference data at unseen operating points.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="canonical" href="https://quasi.digital/validation.html">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><span class="quantum-text">Q</span>uaSi AI</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#solutions">Solutions</a></li>
+                <li><a href="index.html#technology">Technology</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="legal-page">
+        <div class="container">
+            <article class="legal-content">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1>Crystal Growth Simulation</h1>
+                <p class="subtitle">How our hybrid quantum-classical surrogate is validated against certified CFD reference data.</p>
+
+                <div class="legal-body">
+                    <h2>The problem</h2>
+                    <p>Czochralski growth pulls a single silicon crystal from a rotating melt. The flow inside that melt &mdash; buoyancy-driven convection coupled to rotation-driven swirl and heat transfer &mdash; determines the quality of the resulting crystal. Resolving it with computational fluid dynamics is accurate but slow, which makes exploring the process parameter space expensive.</p>
+                    <p>A surrogate model that reproduces the converged flow field in milliseconds, across operating conditions it was never trained on, turns that search from an overnight batch into an interactive one.</p>
+
+                    <h2>Reference data</h2>
+                    <p>We validate against certified CFD reference data for a 2D axisymmetric silicon melt (radius 0.30&nbsp;m, height 0.15&nbsp;m), solved in ANSYS Fluent as steady-state cases on a consistent 8,181-node mesh. The simulation geometry and boundary conditions follow Huang et&nbsp;al. (2025), <em>AIP Advances</em> 15(10), 105202.</p>
+                    <p>The benchmark spans three independent parameter sweeps around a shared anchor condition:</p>
+                    <ul>
+                        <li><strong>Crystal rotation</strong> &mdash; 4 to 20&nbsp;rpm</li>
+                        <li><strong>Hot wall temperature</strong> &mdash; 1730 to 1785&nbsp;K</li>
+                        <li><strong>Crucible rotation</strong> &mdash; &minus;1 to &minus;10&nbsp;rpm</li>
+                    </ul>
+                    <p>Every case passed a four-pillar certification before inclusion: residual convergence, mesh independence, mass and energy conservation, and programmatic checks of the physical boundary conditions. CFD data generation and certification by Bertwin Kurisinkal Shine, TU Chemnitz.</p>
+
+                    <h2>How we measure</h2>
+                    <p>The test set is held out <em>by operating point</em>, not by mesh node. Because every case shares the same mesh, splitting individual nodes at random would place neighbouring points of the same solution on both sides of the split &mdash; that measures interpolation within a case already seen, not generalisation to a new one. Whole cases are therefore reserved, and the model is scored on process conditions it has never encountered.</p>
+                    <p>Accuracy is reported as the coefficient of determination in physical units, separately for each of the five predicted fields: radial, axial and swirl velocity, pressure, and temperature. A single error figure averaged over normalised fields can fall while physical accuracy worsens, because it rewards ignoring whichever field happens to be smallest. Per-field reporting makes that failure mode visible: a score below zero means a prediction is worse than simply guessing that field's mean.</p>
+
+                    <h2>Results at unseen operating points</h2>
+                    <p>Trained on 21 operating points and evaluated on held-out conditions, the surrogate reproduces the converged fields with the following coefficients of determination:</p>
+                    <div class="about-stats" style="margin: 30px 0; flex-wrap: wrap;">
+                        <div class="stat-card">
+                            <span class="stat-number">0.98</span>
+                            <span class="stat-label">Swirl velocity</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">0.98</span>
+                            <span class="stat-label">Pressure</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">0.97</span>
+                            <span class="stat-label">Temperature</span>
+                        </div>
+                    </div>
+                    <p>The meridional velocity components &mdash; radial and axial &mdash; are the harder targets, at roughly 0.75. They are one to two orders of magnitude smaller than the swirl in this regime, so they are the most sensitive to how the fields are scaled before training, and they are where our current work is focused.</p>
+
+                    <h2>Where the physics term earns its place</h2>
+                    <p>Our models combine a data loss against reference solutions with a residual penalty from the governing equations. On a densely sampled mesh the data alone already determines the field, and the physics residual adds little. Its value appears when reference data is scarce: below roughly one percent of the mesh, including the physics residual produces a statistically significant improvement over the identical model trained on data alone.</p>
+                    <p>That is the regime that matters commercially. High-fidelity CFD is expensive precisely because each case costs compute, so a surrogate that needs fewer reference cases to reach a usable accuracy is worth more than one that needs many.</p>
+
+                    <h2>The hybrid architecture</h2>
+                    <p>The network combines classical residual blocks with a parameterised quantum submodule whose expectation values are concatenated into the prediction head. Physical boundary conditions are enforced structurally rather than learned &mdash; radial and swirl velocities are constructed to vanish on the axis of symmetry.</p>
+                    <p>We hold ourselves to a like-for-like comparison: every hybrid configuration is run against a width-matched classical control, so any difference is attributable to the quantum submodule and not to parameter count. On this benchmark the clearest measured effect of the quantum submodule is improved robustness &mdash; under deliberately unfavourable loss scaling, where the classical control degrades sharply, the hybrid retains substantially more accuracy. We report that as we find it, and continue to investigate the regimes where hybrid models offer an advantage.</p>
+
+                    <p class="legal-disclaimer">Benchmark figures are from internal evaluation on the reference dataset described above and are updated as the work progresses. For methodology details or collaboration enquiries, please <a href="contact.html">get in touch</a>.</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html"><span class="quantum-text">Q</span>uaSi</a>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#solutions">Solutions</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="legal.html">Legal</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 QuaSi AI. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
