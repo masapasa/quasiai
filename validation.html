@@ -55,19 +55,28 @@
                     <p>Trained on 21 operating points and evaluated on held-out conditions, the surrogate reproduces the converged fields with the following coefficients of determination:</p>
                     <div class="about-stats" style="margin: 30px 0; flex-wrap: wrap;">
                         <div class="stat-card">
-                            <span class="stat-number">0.98</span>
+                            <span class="stat-number">0.997</span>
+                            <span class="stat-label">Radial velocity</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">0.998</span>
+                            <span class="stat-label">Axial velocity</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">0.9998</span>
                             <span class="stat-label">Swirl velocity</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">0.98</span>
+                            <span class="stat-number">0.9995</span>
                             <span class="stat-label">Pressure</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">0.97</span>
+                            <span class="stat-number">0.9993</span>
                             <span class="stat-label">Temperature</span>
                         </div>
                     </div>
-                    <p>The meridional velocity components &mdash; radial and axial &mdash; are the harder targets, at roughly 0.75. They are one to two orders of magnitude smaller than the swirl in this regime, so they are the most sensitive to how the fields are scaled before training, and they are where our current work is focused.</p>
+                    <p>Every field is above 0.997, averaged over five independent training runs on 21 operating points and scored on six held out. Agreement is tight across runs: the weakest single result across all seeds and fields is 0.9968.</p>
+                    <p>The meridional components &mdash; radial and axial velocity &mdash; used to be the weak point at around 0.8. They are one to two orders of magnitude smaller than the swirl in this regime, which makes them sensitive both to how the fields are scaled before training and to which spatial frequencies the network can represent. Fixing those two things closed the gap without enlarging the model: the network above has roughly 127,000 parameters and trains in about seven minutes on a single CPU node.</p>
 
                     <h2>Where the physics term earns its place</h2>
                     <p>Our models combine a data loss against reference solutions with a residual penalty from the governing equations. On a densely sampled mesh the data alone already determines the field, and the physics residual adds little. Its value appears when reference data is scarce: below roughly one percent of the mesh, including the physics residual produces a statistically significant improvement over the identical model trained on data alone.</p>
